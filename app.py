@@ -32,12 +32,12 @@ def health_test():
 
             if (prediction[0] == 0):
                 flash('Your test results are negetive!', 'success')
-                return redirect(url_for('homepage'))
+                return redirect(url_for('health_test'))
 
             else:
                 flash(
                     "Your test results are Positive, Please see a good Psychiatrist!", 'error')
-                return redirect(url_for('support'))
+                return redirect(url_for('health_test'))
 
         else:
             return render_template('health_test.html')
