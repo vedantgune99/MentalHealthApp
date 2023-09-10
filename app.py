@@ -28,8 +28,7 @@ def health_test():
                 datapts.append(x)
 
             datapts = [int(x) for x in datapts[1:]]
-
-            model_loaded = pickle.load(open('MHSModel.pkl', 'rb'))
+            model_loaded = pickle.load(open('./MHSModel.pkl', 'rb'))
             prediction = model_loaded.predict([datapts])
 
             if (prediction[0] == 0):
@@ -59,4 +58,4 @@ def support():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=8080)
+    app.run(debug=True, port=8080)
