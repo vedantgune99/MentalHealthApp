@@ -5,7 +5,7 @@ import pickle
 
 
 app = Flask(__name__)
-app.secret_key = "MHS_APP123"
+app.secret_key = "VVGAPP"
 
 
 @app.route('/')
