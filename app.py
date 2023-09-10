@@ -5,7 +5,6 @@ import pickle
 
 
 app = Flask(__name__)
-app.secret_key = "VVGAPP"
 
 
 @app.route('/')
@@ -59,4 +58,12 @@ def support():
 
 
 if __name__ == "__main__":
+    HOST = environ.get('SERVER_HOST', 'localhost')
+    try:
+        PORT = int(environ.get('SERVER_PORT', '5555'))
+    except ValueError:
+        PORT = 5555
+
+    app.secret_key = "mywebsite2023"
+    app.run(HOST, port=PORT)
     app.run(debug=False, port=8000)
