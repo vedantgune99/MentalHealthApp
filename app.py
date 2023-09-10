@@ -25,14 +25,11 @@ def health_test():
         req = request.form
         for x in req.values():
             datapts.append(x)
-            print(x)
 
         datapts = [int(x) for x in datapts[1:]]
-        print(datapts)
 
         model_loaded = pickle.load(open('MHSModel.pkl', 'rb'))
         prediction = model_loaded.predict([datapts])
-        print(prediction)
 
         if (prediction[0] == 0):
             flash('Your test results are negetive!', 'success')
