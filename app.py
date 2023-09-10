@@ -34,7 +34,7 @@ def health_test():
 
             if (prediction[0] == 0):
                 flash('Your test results are negetive!', 'success')
-                return redirect('/')
+                return redirect(url_for('homepage'))
 
             else:
                 flash(
