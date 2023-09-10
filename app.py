@@ -1,7 +1,11 @@
 from flask import Flask, render_template
-from flask import request, redirect
+from flask import request, redirect, flash, url_for
+
+import pickle
+
 
 app = Flask(__name__)
+app.secret_key = "VVG_123"
 
 
 @app.route('/')
@@ -15,57 +19,33 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/health_test', methods=['POST', 'GET'])
+@app.route('/health_test', methods=["GET", "POST"])
 def health_test():
-    '''
     datapts = []
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        age = request.POST.get('age')
-        gender = request.POST.get('gender')
-        se = request.POST.get('se')
-        fh = request.POST.get('fh')
-        wi = request.POST.get('wi')
-        noe = request.POST.get('noe')
-        rw = request.POST.get('rw')
-        tc = request.POST.get('tc')
-        b = request.POST.get('b')
-        co = request.POST.get('co')
-        wp = request.POST.get('wp')
-        sh = request.POST.get('sh')
-        a = request.POST.get('a')
-        l = request.POST.get('l')
-        mhc = request.POST.get('mhc')
-        phc = request.POST.get('phc')
-        c = request.POST.get('c')
-        s = request.POST.get('s')
-        mhi = request.POST.get('mhi')
-        phi = request.POST.get('phi')
-        mvp = request.POST.get('mvp')
-        oc = request.POST.get('oc')
+    if request.method == "POST":
+        req = request.form
+        for x in req.values():
+            datapts.append(x)
+            print(x)
 
-        datapts = [age, gender, se, fh, wi, noe, rw, tc, b, co,
-                   wp, sh, a, l, mhc, phc, c, s, mhi, phi, mvp, oc]
+        datapts = [int(x) for x in datapts[1:]]
+        print(datapts)
 
-        data = [int(x) for x in datapts]
-
-        model_loaded = pickle.load(open('Extras/MHSModel.pkl', 'rb'))
-        prediction = model_loaded.predict([data])
+        model_loaded = pickle.load(open('MHSModel.pkl', 'rb'))
+        prediction = model_loaded.predict([datapts])
+        print(prediction)
 
         if (prediction[0] == 0):
-            messages.add_message(request, messages.SUCCESS,
-                                 "Your test results are Negetive!")
+            flash('Your test results are negetive!', 'success')
             return redirect('/')
 
         else:
-            messages.add_message(
-                request, messages.ERROR, "Your test results are Positive, Please see a good Psychiatrist!")
-            return redirect('/gethelp')
+            flash(
+                "Your test results are Positive, Please see a good Psychiatrist!", 'error')
+            return redirect(url_for('support'))
 
-    return render(request, 'mhtest.html')
-
-    return render_template('health_test.html')
-    '''
+    else:
+        return render_template('health_test.html')
 
 
 @app.route('/contact')

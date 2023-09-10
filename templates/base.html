@@ -27,7 +27,7 @@
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
                 <a href="{{ url_for('homepage')}}" class="mr-5 hover:text-white cursor-pointer">Home</a>
                 <a href="{{ url_for('about')}}" class="mr-5 hover:text-white cursor-pointer">About</a>
-                <a href="{{ url_for('health_test')}}" class="mr-5 hover:text-white cursor-pointer">Take Test</a>
+                <a href="{{ url_for('health_test')}}" class="mr-5 hover:text-white cursor-pointer">Test</a>
                 <a href="{{ url_for('contact')}}" class="mr-5 hover:text-white cursor-pointer">Contact</a>
             </nav>
             <a href="{{ url_for('support')}}">
@@ -43,6 +43,19 @@
         </div>
     </header>
     <!-- End Navbar -->
+
+
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+        role="alert">
+        <span class="font-medium">{{ message }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
     {% block content%}
     {% endblock %}
