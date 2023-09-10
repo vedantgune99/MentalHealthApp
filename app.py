@@ -32,19 +32,19 @@ def health_test():
             prediction = model_loaded.predict([datapts])
 
             if (prediction[0] == 0):
-                flash('Your test results are negetive!', 'success')
+                # flash('Your test results are negetive!', 'success')
                 return redirect(url_for('homepage'))
 
             else:
-                flash(
-                    "Your test results are Positive, Please see a good Psychiatrist!", 'error')
+                # flash("Your test results are Positive, Please see a good Psychiatrist!", 'error')
                 return redirect(url_for('support'))
 
         else:
             return render_template('health_test.html')
 
     except Exception as e:
-        flash("An error occurred!", 'error')
+        pass
+        # flash("An error occurred!", 'error')
 
 
 @app.route('/contact')
@@ -58,4 +58,4 @@ def support():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True, port=8000)
