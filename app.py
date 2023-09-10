@@ -1,14 +1,11 @@
 
 from flask import Flask, render_template, request, redirect, flash, url_for
 import pickle
+from os import environ
+
 
 app = Flask(__name__)
 app.secret_key = "mywebsite2023"
-
-
-@app.route('/')
-def homepage():
-    return render_template('home.html')
 
 
 @app.route('/')
