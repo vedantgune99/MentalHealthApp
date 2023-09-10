@@ -23,11 +23,9 @@
 
 ## About The Project
 Overall Design and looks...
-![Screen Shot](Extras/Screenshots/img1.png)<br/>
-![Screen Shot](Extras/Screenshots/img2.png)<br/>
-![Screen Shot](Extras/Screenshots/img4.png)<br/>
-![Screen Shot](Extras/Screenshots/img5.png)<br/>
-
+![Screen Shot](/static/img/ss1.png)<br/>
+![Screen Shot](/static/img/ss2.png)<br/>
+![Screen Shot](/static/img/ss3.png)<br/>
 
 
 ## Project Description :
@@ -35,14 +33,13 @@ The Mental Health Support Applications project is a compassionate and user-centr
 
 
 Custom ML Model & Deployement - <br/>
-![Screen Shot](Extras/Screenshots/img8.png)<br/>
-![Screen Shot](Extras/Screenshots/img9.png)<br/>
-
+![Screen Shot](/static/img/ss4.png)<br/>
+![Screen Shot](/static/img/ss5.png)<br/>
 
 ## Technologies :
 The **Mental Health Support Applications** project leverages a range of technologies and tools to deliver a seamless and effective user experience. These include:
 
-- **Backend Framework**: [Django](https://www.djangoproject.com/) - A high-level Python web framework known for its speed, security, and scalability.
+- **Backend Framework**: [Flask](https://flask.palletsprojects.com/en/2.3.x//) - A high-level Python web library known for its speed, security, and scalability and simplicity.
 
 - **Programming Language**: [Python](https://www.python.org/) - A versatile and easy-to-read programming language used for the server-side logic.
 
@@ -58,11 +55,10 @@ The **Mental Health Support Applications** project leverages a range of technolo
 
 ## Built With
 
-- [Django](https://www.djangoproject.com/)
+- [Django](https://flask.palletsprojects.com/en/2.3.x/)
 - [Python](https://www.python.org/)
 - [Microsoft Azure ChatBot Services](https://azure.microsoft.com/en-us/services/bot-service/)
 - [Scikit-Learn](https://scikit-learn.org/)
-- [Django Authentication](https://docs.djangoproject.com/en/3.2/topics/auth/)
 - [Git](https://git-scm.com/)
 - [Microsoft Azure](https://azure.microsoft.com/en-us/)
 - [Mental Illness Predictive ML Design & Deployement](https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey)

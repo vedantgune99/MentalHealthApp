@@ -5,12 +5,11 @@ import pickle
 
 
 app = Flask(__name__)
-app.secret_key = "VVG_123"
+app.secret_key = "MHS_APP123"
 
 
 @app.route('/')
 def homepage():
-    # return "Hello, World!"
     return render_template('home.html')
 
 
