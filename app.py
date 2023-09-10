@@ -21,18 +21,12 @@ def about():
 @app.route('/health_test', methods=["GET", "POST"])
 def health_test():
     datapts = []
-    if request.method == "POST":
-        req = request.form
-        for x in req.values():
-            datapts.append(x)
-
-        datapts = [int(x) for x in datapts[1:]]
-
+    try:
         model_loaded = pickle.load(open('MHSModel.pkl', 'rb'))
         prediction = model_loaded.predict([datapts])
 
         if (prediction[0] == 0):
-            flash('Your test results are negetive!', 'success')
+            flash('Your test results are negative!', 'success')
             return redirect('/')
 
         else:
@@ -40,8 +34,9 @@ def health_test():
                 "Your test results are Positive, Please see a good Psychiatrist!", 'error')
             return redirect(url_for('support'))
 
-    else:
-        return render_template('health_test.html')
+    except Exception as e:
+        flash('An error occurred while processing your request. Please try again later.', 'error')
+        return redirect('/health_test')
 
 
 @app.route('/contact')
