@@ -32,12 +32,6 @@ Overall Design and looks...
 The Mental Health Support Applications project is a compassionate and user-centric initiative aimed at offering valuable support, resources, and a sense of community to individuals grappling with mental health challenges. In today's fast-paced world, mental health issues are increasingly prevalent, and this project seeks to address these issues through a suite of user-friendly applications.
 
 
-Video Tour to Application - <br/>
-https://github.com/vedantgune99/MentalHealthApp/assets/58701516/35bf6352-7e16-4728-bb5a-4a2fd3d45d7f
-
-
-
-
 Custom ML Model & Deployement - <br/>
 ![Screen Shot](/static/img/ss4.png)<br/>
 ![Screen Shot](/static/img/ss5.png)<br/>
