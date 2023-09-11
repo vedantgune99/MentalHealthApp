@@ -1,11 +1,22 @@
 
 from flask import Flask, render_template, request, redirect, flash, url_for
+from flask_mail import Mail, Message
+from config.py import emailID, password, SECRET_KEY
 import pickle
-from os import environ
+
+
+# configuration of mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = emailID
+app.config['MAIL_PASSWORD'] = password
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 
 app = Flask(__name__)
-app.secret_key = "mywebsite2023"
+app.secret_key = SECRET_KEY
 
 
 @app.route('/')
@@ -18,8 +29,31 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/contact')
+@app.route('/contact', method=['POST', 'GET'])
 def contact():
+    if request.method == "POST":
+        req = request.form
+        user_name = request.form.values()[0]
+        user_email = request.form.values()[1]
+        user_message = request.form.values()[2]
+
+        msg = Message(
+            'Support Required',
+            sender=emailID,
+            recipients=[user_email]
+        )
+        msg.body = f'''
+            Name : {user_name}\n
+            Email : {user_email}\n\n
+            Message : {user_message}\n
+            Dear {user_name},\n\t
+                    Welcome, Your issue will be resolved as soon as possible, we will contact you back soon!
+                    \nThank You!
+            '''
+        mail.send(msg)
+        flash("Query sent successfully!", 'success')
+        return redirect(url_for('homepage'))
+
     return render_template('contact.html')
 
 
@@ -28,22 +62,31 @@ def support():
     return render_template('support.html')
 
 
-@app.route('/health_test', methods=["POST", "GET"])
+@app.route('/health_test', methods=["GET", "POST"])
 def health_test():
-    if request.method == "POST":
-        datapts = request.form.values()
-        formatted = [x for x in datapts]
-        features = [int(x) for x in formatted[1:]]
+    try:
+        if request.method == "POST":
+            datapts = [int(x) for x in request.form.values() if x.isdigit()]
+            if not datapts:
+                flash('Invalid input. Please enter numeric values.', 'error')
+            else:
+                model_loaded = pickle.load(open('./MHSModel.pkl', 'rb'))
+                prediction = model_loaded.predict([datapts])
 
-        model = pickle.load(open('./MHSModel.pkl', 'rb'))
-        predictions = model.predict([features])
+                if prediction[0] == 0:
+                    flash('Your test results are negative!', 'success')
+                    return redirect(url_for('health_test'))
 
-        if predictions[0] == 0:
-            flash("You don't need treatment!", 'success')
+                else:
+                    flash(
+                        'Your test results are positive. Please see a good Psychiatrist!', 'error')
+                    return redirect(url_for('support'))
         else:
-            flash("You need treatment!", 'error')
+            return render_template('health_test.html')
 
-    return render_template('health_test.html')
+    except Exception as e:
+        flash("An error occurred: " + str(e), 'error')
+        return redirect(url_for('health_test'))
 
 
 if __name__ == "__main__":

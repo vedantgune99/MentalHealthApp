@@ -5,7 +5,8 @@ name = "pypi"
 
 [packages]
 flask = "*"
-scikit-learn = "*"
+scikit-learn = "==1.2.2"
+flask-mail = "*"
 
 [dev-packages]
 
