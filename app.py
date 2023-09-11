@@ -39,9 +39,9 @@ def health_test():
         predictions = model.predict([features])
 
         if predictions[0] == 0:
-            print("You don't need treatment!")
+            flash("You don't need treatment!", 'success')
         else:
-            print("You need treatment!")
+            flash("You need treatment!", 'error')
 
     return render_template('health_test.html')
 
