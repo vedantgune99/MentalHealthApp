@@ -22,6 +22,9 @@
 * [Acknowledgements](#acknowledgements)
 
 ## About The Project
+
+https://github.com/vedantgune99/MentalHealthApp/assets/58701516/8dc1e645-c46c-4728-a9ae-a66f704b8dd4
+
 Overall Design and looks...
 ![Screen Shot](/static/img/ss1.png)<br/>
 ![Screen Shot](/static/img/ss2.png)<br/>
