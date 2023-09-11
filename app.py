@@ -30,25 +30,20 @@ def support():
 
 @app.route('/health_test', methods=["POST", "GET"])
 def health_test():
-    try:
-        if request.method == "POST":
-            print(request.method)
-            datapts = [int(x) for x in request.form.values() if x.isdigit()]
-            if not datapts:
-                flash('Invalid input. Please enter numeric values.', 'error')
-            else:
-                model_loaded = pickle.load(open('./MHSModel.pkl', 'rb'))
-                prediction = model_loaded.predict([datapts])
-                if prediction[0] == 0:
-                    flash('Your test results are negative!', 'success')
-                else:
-                    flash(
-                        'Your test results are positive. Please see a good Psychiatrist!', 'error')
-            return redirect(url_for('health_test'))
+    if request.method == "POST":
+        datapts = request.form.values()
+        formatted = [x for x in datapts]
+        features = [int(x) for x in formatted[1:]]
+
+        model = pickle.load(open('./MHSModel.pkl', 'rb'))
+        predictions = model.predict([features])
+
+        if predictions[0] == 0:
+            print("You don't need treatment!")
         else:
-            return render_template('health_test.html')
-    except Exception as e:
-        flash("An error occurred: " + str(e), 'error')
+            print("You need treatment!")
+
+    return render_template('health_test.html')
 
 
 if __name__ == "__main__":
