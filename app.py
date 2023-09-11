@@ -28,17 +28,17 @@ def support():
     return render_template('support.html')
 
 
-@app.route('/health_test', methods=["GET", "POST"])
+@app.route('/health_test', methods=["POST", "GET"])
 def health_test():
     try:
         if request.method == "POST":
+            print(request.method)
             datapts = [int(x) for x in request.form.values() if x.isdigit()]
             if not datapts:
                 flash('Invalid input. Please enter numeric values.', 'error')
             else:
                 model_loaded = pickle.load(open('./MHSModel.pkl', 'rb'))
                 prediction = model_loaded.predict([datapts])
-
                 if prediction[0] == 0:
                     flash('Your test results are negative!', 'success')
                 else:
@@ -52,10 +52,4 @@ def health_test():
 
 
 if __name__ == "__main__":
-    HOST = environ.get('SERVER_HOST', 'localhost')
-    try:
-        PORT = int(environ.get('SERVER_PORT', '5555'))
-    except ValueError:
-        PORT = 5555
-
-    app.run(HOST, port=PORT, debug=True)  # Use debug=True for development
+    app.run(debug=True)
